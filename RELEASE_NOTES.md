@@ -165,20 +165,19 @@ Release v1.1.0
 
 * A default XML `CharSetReader` is now used to prevent failed parsing of XML
   documents using certain encodings.
-  ([Issue](https://github.com/beevik/etree/issues/53)).
+  ([Issue](https://github.com/aneiosi/go_xmltree/issues/53)).
 * All characters are now properly escaped according to XML parsing rules.
-  ([Issue](https://github.com/beevik/etree/issues/55)).
+  ([Issue](https://github.com/aneiosi/go_xmltree/issues/55)).
 * The `Document.Indent` and `Document.IndentTabs` functions no longer insert
   empty string `CharData` tokens.
 
 **Deprecated**
 
 * `Element`
-    * The `InsertChild` method is deprecated. Use `InsertChildAt` instead.
-    * The `CreateCharData` method is deprecated. Use `CreateText` instead.
+  * The `InsertChild` method is deprecated. Use `InsertChildAt` instead.
+  * The `CreateCharData` method is deprecated. Use `CreateText` instead.
 * `CharData`
-    * The `NewCharData` method is deprecated. Use `NewText` instead.
-
+  * The `NewCharData` method is deprecated. Use `NewText` instead.
 
 Release v1.0.1
 ==============
@@ -187,9 +186,9 @@ Release v1.0.1
 
 * Added support for absolute etree Path queries. An absolute path begins with
   `/` or `//` and begins its search from the element's document root.
-* Added [`GetPath`](https://godoc.org/github.com/beevik/etree#Element.GetPath)
-  and [`GetRelativePath`](https://godoc.org/github.com/beevik/etree#Element.GetRelativePath)
-  functions to the [`Element`](https://godoc.org/github.com/beevik/etree#Element)
+* Added [`GetPath`](https://godoc.org/github.com/aneiosi/go_xmltree#Element.GetPath)
+  and [`GetRelativePath`](https://godoc.org/github.com/aneiosi/go_xmltree#Element.GetRelativePath)
+  functions to the [`Element`](https://godoc.org/github.com/aneiosi/go_xmltree#Element)
   type.
 
 **Breaking changes**
@@ -197,7 +196,7 @@ Release v1.0.1
 * A path starting with `//` is now interpreted as an absolute path.
   Previously, it was interpreted as a relative path starting from the element
   whose
-  [`FindElement`](https://godoc.org/github.com/beevik/etree#Element.FindElement)
+  [`FindElement`](https://godoc.org/github.com/aneiosi/go_xmltree#Element.FindElement)
   method was called.  To remain compatible with this release, all paths
   prefixed with `//` should be prefixed with `.//` when called from any
   element other than the document's root.

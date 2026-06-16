@@ -1,10 +1,10 @@
-[![GoDoc](https://godoc.org/github.com/beevik/etree?status.svg)](https://godoc.org/github.com/beevik/etree)
-[![Go](https://github.com/beevik/etree/actions/workflows/go.yml/badge.svg)](https://github.com/beevik/etree/actions/workflows/go.yml)
+[![GoDoc](https://godoc.org/github.com/aneiosi/go_xmltree?status.svg)](https://godoc.org/github.com/aneiosi/go_xmltree)
+[![Go](https://github.com/aneiosi/go_xmltree/actions/workflows/go.yml/badge.svg)](https://github.com/aneiosi/go_xmltree/actions/workflows/go.yml)
 
-etree
+xmltree
 =====
 
-The etree package is a lightweight, pure go package that expresses XML in
+The xmltree package is a lightweight, pure go package that expresses XML in
 the form of an element tree.  Its design was inspired by the Python
 [ElementTree](http://docs.python.org/2/library/xml.etree.elementtree.html)
 module.
@@ -20,12 +20,13 @@ Some of the package's capabilities and features:
 * Built on top of the go [encoding/xml](http://golang.org/pkg/encoding/xml)
   package.
 
-The etree package is compatible with go versions 1.23 and later.
+The xmltree package is compatible with go versions 1.23 and later.
 
 ### Creating an XML document
 
-The following example creates an XML document from scratch using the etree
+The following example creates an XML document from scratch using the xmltree
 package and outputs its indented contents to stdout.
+
 ```go
 doc := etree.NewDocument()
 doc.CreateProcInst("xml", `version="1.0" encoding="UTF-8"`)
@@ -45,6 +46,7 @@ doc.WriteTo(os.Stdout)
 ```
 
 Output:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="style.xsl"?>
@@ -98,7 +100,8 @@ following data:
 </bookstore>
 ```
 
-This code reads the file's contents into an etree document.
+This code reads the file's contents into an xmltree document.
+
 ```go
 doc := etree.NewDocument()
 if err := doc.ReadFromFile("bookstore.xml"); err != nil {
@@ -112,6 +115,7 @@ You can also read XML from a string, a byte slice, or an `io.Reader`.
 
 This example illustrates several ways to access elements and attributes using
 etree selection queries.
+
 ```go
 root := doc.SelectElement("bookstore")
 fmt.Println("ROOT element:", root.Tag)
@@ -127,7 +131,9 @@ for _, book := range root.SelectElementsSeq("book") {
     }
 }
 ```
+
 Output:
+
 ```
 ROOT element: bookstore
 CHILD element: book
@@ -150,6 +156,7 @@ This example uses etree's path functions to select all book titles that fall
 into the category of 'WEB'.  The double-slash prefix in the path causes the
 search for book elements to occur recursively; book elements may appear at any
 level of the XML hierarchy.
+
 ```go
 for _, t := range doc.FindElementsSeq("//book[@category='WEB']/title") {
     fmt.Println("Title:", t.Text())
@@ -157,6 +164,7 @@ for _, t := range doc.FindElementsSeq("//book[@category='WEB']/title") {
 ```
 
 Output:
+
 ```
 Title: XQuery Kick Start
 Title: Learning XML
@@ -164,6 +172,7 @@ Title: Learning XML
 
 This example finds the first book element under the root bookstore element and
 outputs the tag and text of each of its child elements.
+
 ```go
 for _, e := range doc.FindElementsSeq("./bookstore/book[1]/*") {
     fmt.Printf("%s: %s\n", e.Tag, e.Text())
@@ -171,6 +180,7 @@ for _, e := range doc.FindElementsSeq("./bookstore/book[1]/*") {
 ```
 
 Output:
+
 ```
 title: Everyday Italian
 author: Giada De Laurentiis
@@ -179,6 +189,7 @@ price: 30.00
 ```
 
 This example finds all books with a price of 49.99 and outputs their titles.
+
 ```go
 path := etree.MustCompilePath("./bookstore/book[p:price='49.99']/title")
 for _, e := range doc.FindElementsPathSeq(path) {
@@ -187,6 +198,7 @@ for _, e := range doc.FindElementsPathSeq(path) {
 ```
 
 Output:
+
 ```
 XQuery Kick Start
 ```
@@ -197,8 +209,8 @@ search with the same path more than once.
 
 ### Other features
 
-These are just a few examples of the things the etree package can do. See the
-[documentation](http://godoc.org/github.com/beevik/etree) for a complete
+These are just a few examples of the things the xmltree package can do. See the
+[documentation](http://godoc.org/github.com/aneiosi/go_xmltree) for a complete
 description of its capabilities.
 
 ### Contributing
